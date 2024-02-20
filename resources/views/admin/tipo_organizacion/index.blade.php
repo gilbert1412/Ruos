@@ -43,7 +43,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="example" class="display" style="width:100%">
+            <table id="tablaTipoOrganizacion" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -53,15 +53,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Comedor popular</td>
-                        <td>
-                            <button class="btn btn-small btn-primary">Editar</button>
-                            <button class="btn btn-small btn-danger">Eliminar</button>
-                        </td>
+                        @foreach ($data as $value)
+                        <tr>
+                            <td>{{ $value->id }}</td>
+                            <td>{{$value->nombre}}</td>
+                            <td>
+                                <button class="btn btn-small btn-primary">Editar</button>
+                                <button class="btn btn-small btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        @endforeach
 
-                    </tr>
 
 
                 </tbody>
@@ -81,8 +83,7 @@
 <script src="{{asset('js/admin/tipoOrganizacion.js')}}"></script>
 <script>
     let guardarDatos="{{route('tipoOrganizacion.post')}}";
+
 </script>
-<script>
-  var hola= new DataTable('#example');
-</script>
+
 @endsection
