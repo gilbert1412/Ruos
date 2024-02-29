@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Modernize Free</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.png')}}" />
         <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}"  />
         <link href="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.css" rel="stylesheet">

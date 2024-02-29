@@ -57,6 +57,7 @@ function editarTipoOrganizacion(){
         }else if(metodo==='E'){
             $('#idTipoOrganizacion').val(id)
             $('#opTipoOrganizacion').val(metodo);
+            $("#btnFormTipoOrganizacion").trigger("click");
         }
 
     });
@@ -65,11 +66,31 @@ function GuardarTipoOrganizacion(){
     $('#btnFormTipoOrganizacion').click(function(e){
         let tipoOrganizacion=$('#opTipoOrganizacion').val();
         var formData = $('#formTipoOrganiazion').serialize();
-        alert(formData)
         if(tipoOrganizacion ==='I'){
             crudTipoOrganizacion(formData);
         }else if(tipoOrganizacion ==='U'){
-            crudTipoOrganizacion(data);
+            crudTipoOrganizacion(formData);
+        }else if(tipoOrganizacion === 'E'){
+            Swal.fire({
+                title: "Eliminando?",
+                text: "Esta seguro de eliminar el registro!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText:"Cancelar",
+                confirmButtonText: "Aceptar"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    crudTipoOrganizacion(formData);
+                }
+              });
+
+
+
+
+
+
         }
         e.preventDefault();
     })
@@ -78,7 +99,7 @@ function crudTipoOrganizacion(data){
     $.ajax({
         type: 'post',
         url: guardarDatos,
-        data: {'data':data,},
+        data: data,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
@@ -90,13 +111,20 @@ function crudTipoOrganizacion(data){
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function(key, value) {
+                    console.log(key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else{
                 cerrarModal();
                 $('.error-message').text('');
                 $('#tablaTipoOrganizacion').DataTable().ajax.reload();
-                alert(response.success);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: response.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         },
 
