@@ -1,7 +1,6 @@
 @extends('layout.maestra')
 @section('head')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
 <style>
     .error-message {
         color: red;
@@ -31,7 +30,7 @@
                                     <input type="hidden" id="idTipoOrganizacion" name='idTipoOrganizacion'>
                                     <label for="nombreTipoOrganizacion" class="form-label">Nombre del Tipo de la Organizacion</label>
                                     <input class="form-control" type="text" id="nombreTipoOrganizacion" name="nombreTipoOrganizacion" placeholder="Escribir el Nombre" aria-label="default input example">
-                                    <span class="error-message" id="nombreTipoOrganizacionError"></span>
+                                    <span class="error-message" id="nombreError"></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
