@@ -4,57 +4,45 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TipoOrganizacion;
-use App\Http\Requests\TipoOrganizacionRequest;
+use App\Models\Directivo;
 use Illuminate\Support\Facades\Validator;
-
-class TipoOrganizacionController extends Controller
+class DirectivoController extends Controller
 {
     public function index(){
-        return view('admin.tipo_organizacion.index');
+        return view('admin.directivo.index');
     }
     public function cargarTabla(){
-        $data=TipoOrganizacion::select('id','nombre')->where('estado',1)->get();
+        $data=Directivo::select('id','nombre')->where('estado',1)->get();
         return array("data" => $data);
     }
-    public function GuardarTipoOrganizacion(Request $request){
+    public function GuardarDirectivo(Request $request){
         //dd($request->$request->all());
         $validator = Validator::make($request->all(), [
-            'nombreTipoOrganizacion'=>'required'
+            'nombreDirectivo'=>'required'
         ]);
-        if($request->input('opTipoOrganizacion')=='I'){
+        if($request->input('opDirectivo')=='I'){
             if($validator->fails()){
                 return response()->json(['errors' => $validator->errors()->toArray()]);
             }else{
 
-                $data=TipoOrganizacion::create([
-                     'nombre'=>$request->input('nombreTipoOrganizacion')
+                $data=Directivo::create([
+                     'nombre'=>$request->input('nombreDirectivo')
                 ]);
                 return response()->json(['success' => "Registro Guardado"]);
             }
-        }else if($request->input('opTipoOrganizacion')=='U'){
+        }else if($request->input('opDirectivo')=='U'){
             if($validator->fails()){
                 return response()->json(['errors' => $validator->errors()->toArray()]);
             }else{
                 //dd($request->all());
-                TipoOrganizacion::where('id', $request->input('idTipoOrganizacion'))
-                ->update(['nombre' => $request->input('nombreTipoOrganizacion')]);
+                Directivo::where('id', $request->input('idDirectivo'))
+                ->update(['nombre' => $request->input('nombreDirectivo')]);
                 return response()->json(['success' => "Registro Editado"]);
             }
-        }else if($request->input('opTipoOrganizacion')=='E'){
-            TipoOrganizacion::where('id',$request->input('idTipoOrganizacion'))
+        }else if($request->input('opDirectivo')=='E'){
+            Directivo::where('id',$request->input('idDirectivo'))
             ->update(['estado'=>2]);
             return response()->json(['success'=>"Registro Eliminado Correctamente"]);
         }
-
-
-
-
-    }
-    public function actualizarTipoOrganizacion(){
-
-    }
-    public function eliminarTipoOrganizacion(){
-
     }
 }

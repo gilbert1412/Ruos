@@ -1,26 +1,28 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Models\TipoOrganizacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TipoOrganizacion;
-use App\Http\Requests\TipoOrganizacionRequest;
-use Illuminate\Support\Facades\Validator;
 
-class TipoOrganizacionController extends Controller
+class OrganizacionController extends Controller
 {
     public function index(){
-        return view('admin.tipo_organizacion.index');
+        $tipoOrganizacion=TipoOrganizacion::select('id','nombre')->where('estado',1)->get();
+        return view('admin.organizacion.index',compact('tipoOrganizacion'));
     }
     public function cargarTabla(){
         $data=TipoOrganizacion::select('id','nombre')->where('estado',1)->get();
         return array("data" => $data);
     }
-    public function GuardarTipoOrganizacion(Request $request){
+    public function GuardarOrganizacion(Request $request){
         //dd($request->$request->all());
         $validator = Validator::make($request->all(), [
-            'nombreTipoOrganizacion'=>'required'
+            'nombreOrganizacion'=>'required',
+            'direccionOrganizacion'=>'required',
+            'selectTipoOrganizacion'=>'required|numeric',
+            'fechaOrganizacion'=>'required',
+            'numeroIntegrantes'=>'required|numeric'
         ]);
         if($request->input('opTipoOrganizacion')=='I'){
             if($validator->fails()){
@@ -46,15 +48,6 @@ class TipoOrganizacionController extends Controller
             ->update(['estado'=>2]);
             return response()->json(['success'=>"Registro Eliminado Correctamente"]);
         }
-
-
-
-
     }
-    public function actualizarTipoOrganizacion(){
 
-    }
-    public function eliminarTipoOrganizacion(){
-
-    }
 }

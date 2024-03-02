@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{route('directivo')}}" aria-expanded="false">
               <span>
                 <i class="ti ti-alert-circle"></i>
               </span>
@@ -45,11 +45,11 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{route('organizacion')}}" aria-expanded="false">
               <span>
                 <i class="ti ti-cards"></i>
               </span>
-              <span class="hide-menu">Card</span>
+              <span class="hide-menu">Organizacion</span>
             </a>
           </li>
           <li class="sidebar-item">

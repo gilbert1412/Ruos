@@ -1,14 +1,14 @@
 
 
 $(document).ready(function(){
-    var tablaTipoOrganizacion;
+    var tablaDirectivo;
     cargarTabla();
     cargarModal();
-    editarTipoOrganizacion();
-    GuardarTipoOrganizacion();
+    editarOrganizacion();
+    GuardarOrganizacion();
 });
 function cargarTabla(){
-    tablaTipoOrganizacion = $('#tablaTipoOrganizacion').DataTable({
+    tablaDirectivo = $('#tablaOrganizacion').DataTable({
         ajax: cargarDatos,
         searching: true,
         columns: [
@@ -20,8 +20,8 @@ function cargarTabla(){
                     aTargets: [1],
                     mData: "id",
                     mRender: function (data, type, full) {
-                        var acciones = '<div class="btn-group"> <button class="btn btn-info waves-effect waves-light"  metodo="U" idTipoOrganiozacion="' + data + '">Editar</button>';
-                        acciones += '<button class="btn btn-danger waves-effect waves-light" metodo="E" idTipoOrganiozacion="' + data + '">Eliminar</button> </div>'
+                        var acciones = '<div class="btn-group"> <button class="btn btn-info waves-effect waves-light"  metodo="U" idOrganizacion="' + data + '">Editar</button>';
+                        acciones += '<button class="btn btn-danger waves-effect waves-light" metodo="E" idOrganizacion="' + data + '">Eliminar</button> </div>'
                         return acciones;
                     },
                 },
@@ -31,48 +31,48 @@ function cargarTabla(){
     });
 }
 function cargarModal(){
-    $('#btnModalTipoOrganizacion').on('click',function(){
-        $('#btnFormTipoOrganizacion').html('Guardar');
-        $('#modalTipoOrganizacion').modal('show');
-        $('#opTipoOrganizacion').val('I');
-        $('#nombreTipoOrganizacion').val('');
+    $('#btnModalOrganizacion').on('click',function(){
+        $('#btnFormOrganizacion').html('Guardar');
+        $('#modalOrganizacion').modal('show');
+        $('#opOrganizacion').val('I');
+        $('#nombreOrganizacion').val('');
     })
 }
 function cerrarModal(){
-    $('#modalTipoOrganizacion').modal('hide');
+    $('#modalOrganizacion').modal('hide');
 
 }
 
-function editarTipoOrganizacion(){
-    $('.listTablaTipoOrganizacion').on('click', 'button', function() {
-        var data = tablaTipoOrganizacion.row($(this).parents('tr')).data();
+function editarOrganizacion(){
+    $('.listTablaOrganizacion').on('click', 'button', function() {
+        var data = tablaDirectivo.row($(this).parents('tr')).data();
         console.log(data);
         let metodo=$(this).attr('metodo');
-        id=$(this).attr('idTipoOrganiozacion');
-        alert(id);
+        id=$(this).attr('idOrganizacion');
         if(metodo==='U'){
-            $('#idTipoOrganizacion').val(id);
-            $('#nombreTipoOrganizacion').val(data.nombre);
-            $('#modalTipoOrganizacion').modal('show');
-            $('#opTipoOrganizacion').val(metodo);
+            $('#idOrganizacion').val(id);
+            $('#nombreOrganizacion').val(data.nombre);
+            $('#modalOrganizacion').modal('show');
+            $('#opOrganizacion').val(metodo);
         }else if(metodo==='E'){
-            $('#idTipoOrganizacion').val(id)
-            $('#opTipoOrganizacion').val(metodo);
-            $("#btnFormTipoOrganizacion").trigger("click");
+            $('#idOrganizacion').val(id)
+            $('#opOrganizacion').val(metodo);
+            $("#btnOrganizacion").trigger("click");
         }
 
     });
 }
-function GuardarTipoOrganizacion(){
-    $('#btnFormTipoOrganizacion').click(function(e){
-        let tipoOrganizacion=$('#opTipoOrganizacion').val();
-        var formData = $('#formTipoOrganiazion').serialize();
-        if(tipoOrganizacion ==='I'){
-            crudTipoOrganizacion(formData);
-        }else if(tipoOrganizacion ==='U'){
-            console.log(tipoOrganizacion);
-            crudTipoOrganizacion(formData);
-        }else if(tipoOrganizacion === 'E'){
+function GuardarOrganizacion(){
+    $('#btnFormOrganizacion').click(function(e){
+        alert('asd');
+        let Opdirectivo=$('#opOrganizacion').val();
+        var formData = $('#formOrganizacion').serialize();
+        console.log(JSON.stringify(formData));
+        if(Opdirectivo ==='I'){
+            crudDirectivo(formData);
+        }else if(Opdirectivo ==='U'){
+            crudDirectivo(formData);
+        }else if(Opdirectivo === 'E'){
             Swal.fire({
                 title: "Eliminando?",
                 text: "Esta seguro de eliminar el registro!",
@@ -84,7 +84,7 @@ function GuardarTipoOrganizacion(){
                 confirmButtonText: "Aceptar"
               }).then((result) => {
                 if (result.isConfirmed) {
-                    crudTipoOrganizacion(formData);
+                    crudDirectivo(formData);
                 }
               });
 
@@ -97,7 +97,7 @@ function GuardarTipoOrganizacion(){
         e.preventDefault();
     })
 }
-function crudTipoOrganizacion(data){
+function crudDirectivo(data){
     $.ajax({
         type: 'post',
         url: guardarDatos,
@@ -119,7 +119,7 @@ function crudTipoOrganizacion(data){
             } else{
                 cerrarModal();
                 $('.error-message').text('');
-                $('#tablaTipoOrganizacion').DataTable().ajax.reload();
+                $('#tablaDirectivo').DataTable().ajax.reload();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
