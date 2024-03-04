@@ -6,6 +6,7 @@ $(document).ready(function () {
     cargarModal();
     editarOrganizacion();
     GuardarOrganizacion();
+    guardarPersona();
 });
 function cargarTabla() {
     tablaOrganizacion = $('#tablaOrganizacion').DataTable({
@@ -29,6 +30,14 @@ function cargarTabla() {
                         return acciones;
                     },
                 },
+                {
+                    aTargets: [6],
+                    mData: "id",
+                    mRender: function (data, type, full) {
+                        var acciones = '<div class="btn-group"> <button class="btn btn-info waves-effect waves-light"  metodo="A" idOrganizacion="' + data + '">Añadir Miembros</button>';
+                        return acciones;
+                    },
+                },
 
             ],
 
@@ -44,7 +53,6 @@ function cargarModal() {
 }
 function cerrarModal() {
     $('#modalOrganizacion').modal('hide');
-
 }
 
 function editarOrganizacion() {
@@ -66,15 +74,21 @@ function editarOrganizacion() {
             $('#idOrganizacion').val(id)
             $('#opOrganizacion').val(metodo);
             $("#btnOrganizacion").trigger("click");
+        }else if(metodo=== 'A'){
+            alert(metodo);
+            $('#opOrganizacionPersona').val(metodo);
+            $('#idOrganizacionPersona').val(id);
+            $("#modalPersona").modal('show');
         }
 
     });
 }
 function GuardarOrganizacion() {
     $('#btnFormOrganizacion').click(function (e) {
-        alert('asd');
         let Opdirectivo = $('#opOrganizacion').val();
+        alert("directivo" + Opdirectivo);
         var formData = $('#formOrganizacion').serialize();
+        var formPersona=$('#formPersonal').serialize();
         console.log(JSON.stringify(formData));
         if (Opdirectivo === 'I') {
             crudDirectivo(formData);
@@ -95,12 +109,9 @@ function GuardarOrganizacion() {
                     crudDirectivo(formData);
                 }
             });
-
-
-
-
-
-
+        } else if(Opdirectivo==='A'){
+            alert('asdasdas');
+            crudPersona(formPersona);
         }
         e.preventDefault();
     })
@@ -128,6 +139,55 @@ function crudDirectivo(data) {
                 cerrarModal();
                 $('.error-message').text('');
                 $('#tablaOrganizacion').DataTable().ajax.reload();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: response.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        },
+
+    });
+}
+function guardarPersona(){
+    $('#btnFormPersona').click(function (e) {
+        let Opdirectivo = $('#opOrganizacionPersona').val();
+        alert("directivo" + Opdirectivo);
+        var formData = $('#formOrganizacion').serialize();
+        var formPersona=$('#formPersonal').serialize();
+        console.log(JSON.stringify(formData));
+         if(Opdirectivo==='A'){
+            alert('asdasdas');
+            crudPersona(formPersona);
+        }
+        e.preventDefault();
+    })
+}
+
+function crudPersona(data) {
+    $.ajax({
+        type: 'post',
+        url: guardarDatos,
+        data: data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            //se ejecuta cuabndo se cierra el modal
+            $('#modalPersona').on('hidden.bs.modal', function () {
+                $('.error-message').text('');
+            });
+            // Si hay errores, mostrarlos debajo de cada campo correspondiente
+            if (response.errors) {
+                $.each(response.errors, function (key, value) {
+                    console.log("hola"+key);
+                    $("#" + key + "Error").text(value[0]);
+                });
+            } else {
+                cerrarModal();
+                $('.error-message').text('');
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
