@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\TipoOrganizacion;
+use App\Models\Organizacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 class OrganizacionController extends Controller
 {
     public function index(){
@@ -12,7 +14,12 @@ class OrganizacionController extends Controller
         return view('admin.organizacion.index',compact('tipoOrganizacion'));
     }
     public function cargarTabla(){
-        $data=TipoOrganizacion::select('id','nombre')->where('estado',1)->get();
+        $data=DB::table('organizacion')
+        ->join('tipo_organizacion','organizacion.tipo_organizacion_id','=','tipo_organizacion.id')
+        ->select('organizacion.*','tipo_organizacion.nombre as tipoOrganizacionNombre')
+        ->get();
+        //dd($data);
+        //$data=Organizacion::select('id','nombre','direccion','fecha_inicio','numero_integrantes')->where('estado',1)->get();
         return array("data" => $data);
     }
     public function GuardarOrganizacion(Request $request){
@@ -24,27 +31,39 @@ class OrganizacionController extends Controller
             'fechaOrganizacion'=>'required',
             'numeroIntegrantes'=>'required|numeric'
         ]);
-        if($request->input('opTipoOrganizacion')=='I'){
+        if($request->input('opOrganizacion')=='I'){
             if($validator->fails()){
                 return response()->json(['errors' => $validator->errors()->toArray()]);
             }else{
-
-                $data=TipoOrganizacion::create([
-                     'nombre'=>$request->input('nombreTipoOrganizacion')
+               // dd($request->input('fechaOrganizacion'));
+                $data=Organizacion::create([
+                     'nombre'=>$request->input('nombreOrganizacion'),
+                     'direccion'=>$request->input('direccionOrganizacion'),
+                     'tipo_organizacion_id'=>$request->input('selectTipoOrganizacion'),
+                     'fecha_inicio'=>$request->input('fechaOrganizacion'),
+                     'numero_integrantes'=>$request->input('numeroIntegrantes'),
+                     'descripcion'=>$request->input('descripcionOrganizacion'),
                 ]);
                 return response()->json(['success' => "Registro Guardado"]);
             }
-        }else if($request->input('opTipoOrganizacion')=='U'){
+        }else if($request->input('opOrganizacion')=='U'){
             if($validator->fails()){
                 return response()->json(['errors' => $validator->errors()->toArray()]);
             }else{
                 //dd($request->all());
-                TipoOrganizacion::where('id', $request->input('idTipoOrganizacion'))
-                ->update(['nombre' => $request->input('nombreTipoOrganizacion')]);
+                Organizacion::where('id', $request->input('idOrganizacion'))
+                ->update([
+                    'nombre'=>$request->input('nombreOrganizacion'),
+                    'direccion'=>$request->input('direccionOrganizacion'),
+                    'tipo_organizacion_id	'=>$request()->input('selectTipoOrganizacion'),
+                    'fecha_inicio'=>$request->input('fechaOrganizacion'),
+                    'numero_integrantes'=>$request->input('numeroIntegrantes'),
+                    'descripcion'=>$request->input('descripcionOrganizacion'),
+                ]);
                 return response()->json(['success' => "Registro Editado"]);
             }
-        }else if($request->input('opTipoOrganizacion')=='E'){
-            TipoOrganizacion::where('id',$request->input('idTipoOrganizacion'))
+        }else if($request->input('opOrganizacion')=='E'){
+            Organizacion::where('id',$request->input('idOrganizacion'))
             ->update(['estado'=>2]);
             return response()->json(['success'=>"Registro Eliminado Correctamente"]);
         }

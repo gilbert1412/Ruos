@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('tipo-organizacion', [TipoOrganizacionController::class, 'index'])->name('tipoOrganizacion');
 Route::post('tipo-organizacion/post', [TipoOrganizacionController::class, 'GuardarTipoOrganizacion'])->name('tipoOrganizacion.post');
 Route::get('tipo-organizacion/get', [TipoOrganizacionController::class, 'cargarTabla'])->name('tipoOrganizacion.mostrar');
+
 //Directivo
 Route::get('directivo', [DirectivoController::class, 'index'])->name('directivo');
 Route::post('directivo/post', [DirectivoController::class, 'GuardarDirectivo'])->name('directivo.post');
@@ -29,5 +30,5 @@ Route::get('directivo/get', [DirectivoController::class, 'cargarTabla'])->name('
 
 //Organizacion
 Route::get('organizacion', [OrganizacionController::class, 'index'])->name('organizacion');
-Route::post('organizacion/post', [OrganizacionController::class, 'GuardarDirectivo'])->name('organizacion.post');
+Route::post('organizacion/post', [OrganizacionController::class, 'GuardarOrganizacion'])->name('organizacion.post');
 Route::get('organizacion/get', [OrganizacionController::class, 'cargarTabla'])->name('organizacion.mostrar');

@@ -49,7 +49,7 @@
 
                                             <label for="selectTipoOrganizacion" class="form-label">Tipo de Organizacion</label>
                                             <select name="selectTipoOrganizacion" id="selectTipoOrganizacion" class="form-control">
-                                                <option value="" disabled>Seleccione</option>
+                                                <option value="" hidden>Seleccione</option>
                                                 @foreach ( $tipoOrganizacion as $values )
                                                     <option value={{$values->id}}>{{$values->nombre}}</option>
                                                 @endforeach
@@ -95,18 +95,26 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaOrganizacion" class="listTablaOrganizacion display" style="width:100%">
+            <table id="tablaOrganizacion" class="listTablaOrganizacion display text-align-center" style="width:100%">
                 <thead>
                     <tr>
 
-                        <th>nombre</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Fecha de Creación</th>
+                        <th>Numero de Integrantes</th>
+                        <th>Tipo de Organizacion</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
 
-                        <th>nombre</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Fecha de Creación</th>
+                        <th>Numero de Integrantes</th>
+                        <th>Tipo de Organizacion</th>
                         <th>Acciones</th>
                     </tr>
                 </tfoot>
