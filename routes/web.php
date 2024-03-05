@@ -32,3 +32,8 @@ Route::get('directivo/get', [DirectivoController::class, 'cargarTabla'])->name('
 Route::get('organizacion', [OrganizacionController::class, 'index'])->name('organizacion');
 Route::post('organizacion/post', [OrganizacionController::class, 'GuardarOrganizacion'])->name('organizacion.post');
 Route::get('organizacion/get', [OrganizacionController::class, 'cargarTabla'])->name('organizacion.mostrar');
+
+//Persona
+
+Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('persona');
+Route::get('personal/get', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');

@@ -38,6 +38,14 @@ function cargarTabla() {
                         return acciones;
                     },
                 },
+                {
+                    aTargets: [7],
+                    mData: "id",
+                    mRender: function (data, type, full) {
+                        var acciones = '<div class="btn-group"> <button class="btn btn-success waves-effect waves-light"  metodo="V" idOrganizacion="' + data + '">ver Miembros</button>';
+                        return acciones;
+                    },
+                },
 
             ],
 
@@ -49,6 +57,11 @@ function cargarModal() {
         $('#modalOrganizacion').modal('show');
         $('#opOrganizacion').val('I');
         $('#nombreOrganizacion').val('');
+        $('#nombreOrganizacion').val('');
+        $("#direccionOrganizacion").val('')
+        $("#selectTipoOrganizacion").val('')
+        $("#fechaOrganizacion").val('')
+        $("#numeroIntegrantes").val('')
     })
 }
 function cerrarModal() {
@@ -61,10 +74,13 @@ function editarOrganizacion() {
         let metodo = $(this).attr('metodo');
         id = $(this).attr('idOrganizacion');
         if (metodo === 'U') {
+            console.log(data);
             $('#idOrganizacion').val(id);
             $('#nombreOrganizacion').val(data.nombre);
             $("#direccionOrganizacion").val(data.direccion)
-            $("#selectTipoOrganizacion").val(data.tipoOrganizacionNombre)
+            alert(data.tipo_organizacion_id);
+            $("#selectTipoOrganizacion").val(data.tipoOrganizacionId)
+            //$('#selectTipoOrganizacion > option[value='+data.tipo_organizacion_id+']').attr('selected', 'selected');
             $("#fechaOrganizacion").val(data.fecha_inicio)
             $("#numeroIntegrantes").val(data.numero_integrantes)
             //$("#descripcionOrganizacion").val(data.)
@@ -73,12 +89,14 @@ function editarOrganizacion() {
         } else if (metodo === 'E') {
             $('#idOrganizacion').val(id)
             $('#opOrganizacion').val(metodo);
-            $("#btnOrganizacion").trigger("click");
+            $("#btnFormOrganizacion").trigger("click");
         }else if(metodo=== 'A'){
-            alert(metodo);
             $('#opOrganizacionPersona').val(metodo);
             $('#idOrganizacionPersona').val(id);
             $("#modalPersona").modal('show');
+        }else if(metodo ==='V'){
+            alert(id);
+            window.location.href =mostrarPersona+'?id='+id;
         }
 
     });
@@ -86,7 +104,6 @@ function editarOrganizacion() {
 function GuardarOrganizacion() {
     $('#btnFormOrganizacion').click(function (e) {
         let Opdirectivo = $('#opOrganizacion').val();
-        alert("directivo" + Opdirectivo);
         var formData = $('#formOrganizacion').serialize();
         var formPersona=$('#formPersonal').serialize();
         console.log(JSON.stringify(formData));
@@ -110,7 +127,6 @@ function GuardarOrganizacion() {
                 }
             });
         } else if(Opdirectivo==='A'){
-            alert('asdasdas');
             crudPersona(formPersona);
         }
         e.preventDefault();
@@ -126,7 +142,7 @@ function crudDirectivo(data) {
         },
         success: function (response) {
             //se ejecuta cuabndo se cierra el modal
-            $('#modalTipoOrganizacion').on('hidden.bs.modal', function () {
+            $('#modalOrganizacion').on('hidden.bs.modal', function () {
                 $('.error-message').text('');
             });
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
@@ -154,12 +170,10 @@ function crudDirectivo(data) {
 function guardarPersona(){
     $('#btnFormPersona').click(function (e) {
         let Opdirectivo = $('#opOrganizacionPersona').val();
-        alert("directivo" + Opdirectivo);
         var formData = $('#formOrganizacion').serialize();
         var formPersona=$('#formPersonal').serialize();
         console.log(JSON.stringify(formData));
          if(Opdirectivo==='A'){
-            alert('asdasdas');
             crudPersona(formPersona);
         }
         e.preventDefault();

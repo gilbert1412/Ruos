@@ -102,10 +102,11 @@
                         <th>Nombre</th>
                         <th>Direccion</th>
                         <th>Fecha de Creación</th>
-                        <th>Numero de Integrantes</th>
+                        <th>Numero de Miembros</th>
                         <th>Tipo de Organizacion</th>
                         <th>Acciones</th>
-                        <th>Numero de Integrantes</th>
+                        <th>Añadir Miembros</th>
+                        <th>Ver Miembros</th>
 
                     </tr>
                 </thead>
@@ -114,10 +115,11 @@
                         <th>Nombre</th>
                         <th>Direccion</th>
                         <th>Fecha de Creación</th>
-                        <th>Numero de Integrantes</th>
+                        <th>Numero de Miembros</th>
                         <th>Tipo de Organizacion</th>
                         <th>Acciones</th>
-                        <th>Numero de Integrantes</th>
+                        <th>Añadir Miembros</th>
+                        <th>Ver Miembros</th>
 
                     </tr>
                 </tfoot>
@@ -138,7 +140,7 @@
                         <div class="col-md-6">
                             <div class="mb-6">
                                 <input type="hidden" id="opOrganizacionPersona" name="opOrganizacionPersona"|>
-                                <input type="text" id="idOrganizacionPersona" name="idOrganizacionPersona">
+                                <input type="hidden" id="idOrganizacionPersona" name="idOrganizacionPersona">
                                 <label for="apePaterno" class="form-label">Apellido Paterno</label>
                                 <input class="form-control" type="text" id="apePaterno" name="apePaterno" placeholder="Escribir el Nombre" aria-label="default input example">
                                 <span class="error-message" id="apePaternoError"></span>
@@ -209,9 +211,11 @@
 @endsection
 @section('js')
 <script src="{{asset('js/admin/organizacion.js')}}"></script>
+
 <script>
     let guardarDatos="{{route('organizacion.post')}}";
     let cargarDatos="{{route('organizacion.mostrar')}}";
+    let mostrarPersona="{{route('persona')}}";
 </script>
 
 @endsection
