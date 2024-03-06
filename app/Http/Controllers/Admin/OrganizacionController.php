@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 class OrganizacionController extends Controller
 {
-    public $id;
+
     public function index(){
         $tipoOrganizacion=TipoOrganizacion::select('id','nombre')->where('estado',1)->get();
         $directivo=Directivo::select('id','nombre')->where('estado',1)->get();
@@ -106,12 +106,33 @@ class OrganizacionController extends Controller
     }
 
     public function verPersona(){
-        $id=request('id');
-        return view('admin.persona.index');
+        $directivo=Directivo::select('id','nombre')->where('estado',1)->get();
+        $data= DB::table('persona')
+        ->join('directivos','persona.directivo_id','=','directivos.id')
+        ->select('persona.*','directivos.nombre as nombreDirectivo', 'directivos.id as directivosId')
+        ->where('persona.organizacion_id','=',request('id'))
+        ->where('persona.estado',1)
+        ->get();
+        return view('admin.persona.index',compact('data','directivo'));
     }
+
     public function cargarListaPersona(){
-        dd($id);
-        $data=Persona::where('organizacion_id','=' ,request('id'))->get();
-        return array("data"=>$data);
+
+        $data=DB::table('persona')
+        ->where('estado',1)
+        ->get();
+
+        DB::table('persona')
+        ->join('directivos','persona.directivo.id','=','directivos.id')
+        ->select('persona.*','directivos.nombre as nombreDirectivo')
+        ->where('persona.estado',1)
+        ->get();
+
+
+
+
+
+
+       return (array("data"=>$data));
     }
 }

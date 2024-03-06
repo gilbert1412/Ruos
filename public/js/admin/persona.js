@@ -1,10 +1,43 @@
+var tabla;
 $(document).ready(function(){
-    var tablaPersona;
-    cargarTabla();
-    // cargarModal();
-    // editarDirectivo();
-    // GuardarDirectivo();
+    tabla=$('#tablaPersona').DataTable({
+        columns: [
+            { "data": "apePaterno" },
+            { "data": "apeMaterno" },
+            { "data": "nombre" },
+            {"data":"dni"},
+            {"data":"direccion"},
+            {"data":"celular"},
+            {"data":"cargo"},
+            {"data":"acciones"},
+            {"data":"directivosId"},
+
+        ],
+    })
+    editarModal();
 });
+function cargarTabla(){
+
+}
+function editarModal(){
+    $('.listTablaPersona').on('click', 'button', function () {
+        var data=tabla.row($(this).parents('tr')).data();
+        console.log(JSON.stringify(data));
+
+        $("#apePaterno").val(data.apePaterno);
+        $("#apeMaterno").val(data.apeMaterno);
+        $("#nombre").val(data.nombre);
+        $("#dni").val(data.dni);
+        $("#direccion").val(data.direccion);
+        $("#celular").val(data.celular);
+        $("#selectDirectivo").val(data.directivosId);
+        $('#modalPersona').modal('show');
+    })
+}
+
+
+
+
 function cargarTabla(){
     tablaPersona = $('#tablaPersona').DataTable({
         ajax: listarPersona,

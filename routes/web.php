@@ -36,4 +36,4 @@ Route::get('organizacion/get', [OrganizacionController::class, 'cargarTabla'])->
 //Persona
 
 Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('persona');
-Route::get('personal/get', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');
+Route::get('persona', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');

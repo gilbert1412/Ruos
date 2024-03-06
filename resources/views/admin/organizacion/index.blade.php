@@ -110,6 +110,7 @@
 
                     </tr>
                 </thead>
+                <tbody></tbody>
                 <tfoot>
                     <tr>
                         <th>Nombre</th>

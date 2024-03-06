@@ -95,8 +95,11 @@ function editarOrganizacion() {
             $('#idOrganizacionPersona').val(id);
             $("#modalPersona").modal('show');
         }else if(metodo ==='V'){
-            alert(id);
+
             window.location.href =mostrarPersona+'?id='+id;
+            // alert(id);
+            // window.location.href =mostrarPersona+'?id='+id;
+
         }
 
     });
@@ -214,3 +217,5 @@ function crudPersona(data) {
 
     });
 }
+
+
