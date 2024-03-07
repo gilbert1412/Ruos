@@ -111,7 +111,6 @@ function crudDirectivo(data){
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function(key, value) {
-                    console.log(key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else{

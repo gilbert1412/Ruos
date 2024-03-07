@@ -1,5 +1,10 @@
 var tabla;
 $(document).ready(function(){
+    cargarTabla();
+    editarModal();
+    guardarPersona();
+});
+function cargarTabla(){
     tabla=$('#tablaPersona').DataTable({
         columns: [
             { "data": "apePaterno" },
@@ -14,31 +19,97 @@ $(document).ready(function(){
 
         ],
     })
-    editarModal();
-});
-function cargarTabla(){
-
 }
 function editarModal(){
     $('.listTablaPersona').on('click', 'button', function () {
         var data=tabla.row($(this).parents('tr')).data();
         console.log(JSON.stringify(data));
+        let metodo = $(this).attr('metodo');
+        id = $(this).attr('idPersona');
+        if(metodo==='U'){
+            $("#apePaterno").val(data.apePaterno);
+            $("#apeMaterno").val(data.apeMaterno);
+            $("#nombre").val(data.nombre);
+            $("#dni").val(data.dni);
+            $("#direccion").val(data.direccion);
+            $("#celular").val(data.celular);
+            $('#opPersona').val(metodo);
+            $('#idPersona').val(id);
+            $("#selectDirectivo").val(data.directivosId);
+            $('#modalPersona').modal('show');
+        }else if(metodo==='E'){
+            $('#opPersona').val(metodo);
+            $('#idPersona').val(id);
+            $("#btnFormPersona").trigger("click");
+        }
 
-        $("#apePaterno").val(data.apePaterno);
-        $("#apeMaterno").val(data.apeMaterno);
-        $("#nombre").val(data.nombre);
-        $("#dni").val(data.dni);
-        $("#direccion").val(data.direccion);
-        $("#celular").val(data.celular);
-        $("#selectDirectivo").val(data.directivosId);
-        $('#modalPersona').modal('show');
     })
+}
+function guardarPersona() {
+    $('#btnFormPersona').click(function (e) {
+        let opPersona = $('#opPersona').val();
+        var formData = $('#formPersonal').serialize();
+        var formPersona=$('#formPersonal').serialize();
+        console.log(JSON.stringify(opPersona));
+        if (opPersona === 'U') {
+            crudPersona(formData);
+        } else if (opPersona === 'E') {
+            Swal.fire({
+                title: "Eliminando?",
+                text: "Esta seguro de eliminar el registro!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Aceptar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    crudPersona(formData);
+                }
+            });
+        }
+        e.preventDefault();
+    })
+}
+function crudPersona(data) {
+    $.ajax({
+        type: 'post',
+        url: guardarDatos,
+        data: data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            //se ejecuta cuabndo se cierra el modal
+            $('#modalPersona').on('hidden.bs.modal', function () {
+                $('.error-message').text('');
+            });
+            // Si hay errores, mostrarlos debajo de cada campo correspondiente
+            if (response.errors) {
+                $.each(response.errors, function (key, value) {
+                    console.log("hola"+key);
+                    $("#" + key + "Error").text(value[0]);
+                });
+            } else {
+                $('#modalPersona').modal('hide');
+                $('.error-message').text('');
+                // Swal.fire({
+                //     position: "top-end",
+                //     icon: "success",
+                //     title: response.success,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
+                location.reload();
+            }
+        },
+
+    });
 }
 
 
-
-
-function cargarTabla(){
+function cargarTablaPersona(){
     tablaPersona = $('#tablaPersona').DataTable({
         ajax: listarPersona,
         searching: true,

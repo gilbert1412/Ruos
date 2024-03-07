@@ -48,7 +48,7 @@
                                         <div class="mb-6">
 
                                             <label for="selectTipoOrganizacion" class="form-label">Tipo de Organizacion</label>
-                                            <select name="selectTipoOrganizacion" id="selectTipoOrganizacion" class="form-control">
+                                            <select name="selectTipoOrganizacion" id="selectTipoOrganizacion" class="form-select">
                                                 <option value="" hidden>Seleccione</option>
                                                 @foreach ( $tipoOrganizacion as $values )
                                                     <option value={{$values->id}}>{{$values->nombre}}</option>
@@ -95,7 +95,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaOrganizacion" class="listTablaOrganizacion display text-align-center" style="width:100%">
+            <table id="tablaOrganizacion" class="listTablaOrganizacion display table-hover" style="width:100%">
                 <thead>
                     <tr>
 
@@ -187,7 +187,7 @@
                         <div class="col-md-6">
                             <div class="mb-6">
                                 <label for="selectDirectivo" class="form-label">CARGO</label>
-                                <select name="selectDirectivo" id="selectDirectivo" class="form-control">
+                                <select name="selectDirectivo" id="selectDirectivo" class="form-select">
                                     <option value="" hidden>Seleccione</option>
                                     @foreach ($directivo as $value )
                                         <option value="{{$value->id}}">{{$value->nombre}}</option>

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Persona;
+use Illuminate\Support\Facades\Validator;
 class PersonaController extends Controller
 {
     public function GuardarPersona(Request $request){
@@ -18,40 +19,71 @@ class PersonaController extends Controller
             'celular'=>'required',
             'selectDirectivo'=>'required',
         ]);
-        if($request->input('opPersona')=='I'){
-            if($validator->fails()){
-                return response()->json(['errors' => $validator->errors()->toArray()]);
-            }else{
-
-                $data=TipoOrganizacion::create([
-                     'nombre'=>$request->input('nombreTipoOrganizacion'),
-                     'apePaterno'=>$request->input('apeMaterno'),
-                     'apeMaterno'=>  $request->input('apePaterno'),
-                     'nombre'=>$request->input('nombre'),
-                     'dni'=>$request->input('dni'),
-                     'direccion'=>$request->input('direccion'),
-                     'celualr'=>$request->input('celular'),
-                     'directivo_id'=>$request->input('selectDirectivo'),
-                     'organizacion_id'=>$request->input('idOrganizacionPersona')
-
-
-                ]);
-                return response()->json(['success' => "Registro Guardado"]);
-            }
-        }else if($request->input('opTipoOrganizacion')=='U'){
+        if($request->input('opPersona')=='U'){
             if($validator->fails()){
                 return response()->json(['errors' => $validator->errors()->toArray()]);
             }else{
                 //dd($request->all());
-                TipoOrganizacion::where('id', $request->input('idTipoOrganizacion'))
-                ->update(['nombre' => $request->input('nombreTipoOrganizacion')]);
+                Persona::where('id', $request->input('idPersona'))
+                ->update([
+                    'apePaterno'=>$request->input('apeMaterno'),
+                    'apeMaterno'=>  $request->input('apePaterno'),
+                    'nombre'=>$request->input('nombre'),
+                    'dni'=>$request->input('dni'),
+                    'direccion'=>$request->input('direccion'),
+                    'celular'=>$request->input('celular'),
+                    'directivo_id'=>$request->input('selectDirectivo'),
+                ]);
                 return response()->json(['success' => "Registro Editado"]);
             }
-        }else if($request->input('opTipoOrganizacion')=='E'){
-            TipoOrganizacion::where('id',$request->input('idTipoOrganizacion'))
+        }else if($request->input('opPersona')=='E'){
+
+            Persona::where('id',$request->input('idPersona'))
             ->update(['estado'=>2]);
             return response()->json(['success'=>"Registro Eliminado Correctamente"]);
         }
+
+
+
+
+
+
+
+        // if($request->input('opPersona')=='I'){
+        //     if($validator->fails()){
+        //         return response()->json(['errors' => $validator->errors()->toArray()]);
+        //     }else{
+
+        //         $data=TipoOrganizacion::create([
+        //              'nombre'=>$request->input('nombreTipoOrganizacion'),
+        //              'apePaterno'=>$request->input('apeMaterno'),
+        //              'apeMaterno'=>  $request->input('apePaterno'),
+        //              'nombre'=>$request->input('nombre'),
+        //              'dni'=>$request->input('dni'),
+        //              'direccion'=>$request->input('direccion'),
+        //              'celualr'=>$request->input('celular'),
+        //              'directivo_id'=>$request->input('selectDirectivo'),
+        //              'organizacion_id'=>$request->input('idOrganizacionPersona')
+
+
+        //         ]);
+        //         return response()->json(['success' => "Registro Guardado"]);
+        //     }
+        // }else if($request->input('opTipoOrganizacion')=='U'){
+        //     if($validator->fails()){
+        //         return response()->json(['errors' => $validator->errors()->toArray()]);
+        //     }else{
+        //         //dd($request->all());
+        //         TipoOrganizacion::where('id', $request->input('idTipoOrganizacion'))
+        //         ->update(['nombre' => $request->input('nombreTipoOrganizacion')]);
+        //         return response()->json(['success' => "Registro Editado"]);
+        //     }
+        // }else if($request->input('opTipoOrganizacion')=='E'){
+        //     TipoOrganizacion::where('id',$request->input('idTipoOrganizacion'))
+        //     ->update(['estado'=>2]);
+        //     return response()->json(['success'=>"Registro Eliminado Correctamente"]);
+        // }
+
 
 
 

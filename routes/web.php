@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TipoOrganizacionController;
 use App\Http\Controllers\Admin\DirectivoController;
 use App\Http\Controllers\Admin\OrganizacionController;
+use App\Http\Controllers\Admin\PersonaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,5 @@ Route::get('organizacion/get', [OrganizacionController::class, 'cargarTabla'])->
 
 Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('persona');
 Route::get('persona', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');
+
+Route::post('persona/post', [PersonaController::class, 'GuardarPersona'])->name('persona.post');
