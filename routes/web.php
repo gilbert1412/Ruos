@@ -15,10 +15,13 @@ use App\Http\Controllers\Admin\PersonaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
-    return view('layout.maestra');
+    return view('auth.login');
 });
+
 //TipoOrganizacion
 Route::get('tipo-organizacion', [TipoOrganizacionController::class, 'index'])->name('tipoOrganizacion');
 Route::post('tipo-organizacion/post', [TipoOrganizacionController::class, 'GuardarTipoOrganizacion'])->name('tipoOrganizacion.post');
@@ -40,3 +43,5 @@ Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('per
 Route::get('persona', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');
 
 Route::post('persona/post', [PersonaController::class, 'GuardarPersona'])->name('persona.post');
+
+
