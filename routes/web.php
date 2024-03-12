@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\TipoOrganizacionController;
 use App\Http\Controllers\Admin\DirectivoController;
 use App\Http\Controllers\Admin\OrganizacionController;
 use App\Http\Controllers\Admin\PersonaController;
+use App\Http\Controllers\Admin\RolController;
+use App\Http\Controllers\Admin\PermisoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,5 +45,15 @@ Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('per
 Route::get('persona', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');
 
 Route::post('persona/post', [PersonaController::class, 'GuardarPersona'])->name('persona.post');
+
+//usuario
+Route::get('rol', [RolController::class, 'index'])->name('rol');
+Route::get('rol/get', [RolController::class, 'cargarTabla'])->name('rol.mostrar');
+Route::post('rol/post', [RolController::class, 'guardarRol'])->name('rol.post');
+
+//Permiso
+Route::get('permiso', [PermisoController::class, 'index'])->name('permiso');
+Route::get('permiso/get', [PermisoController::class, 'cargarTabla'])->name('permiso.mostrar');
+Route::post('permiso/post', [PermisoController::class, 'guardarPermiso'])->name('permiso.post');
 
 
