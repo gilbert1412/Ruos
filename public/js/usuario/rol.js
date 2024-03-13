@@ -7,6 +7,7 @@ $(document).ready(function(){
     cargarModal();
     editarRol();
     GuardarRol();
+    guardarRolPermiso();
 });
 function cargarTabla(){
     tablaRol = $('#tablaRol').DataTable({
@@ -30,7 +31,7 @@ function cargarTabla(){
                     aTargets: [2],
                     mData: "id",
                     mRender: function (data, type, full) {
-                        var acciones = '<div class="btn-group"> <button class="btn btn-success waves-effect waves-light"  metodo="P" idOrganizacion="' + data + '">Agregar Permisos</button>';
+                        var acciones = '<div class="btn-group"> <button class="btn btn-success waves-effect waves-light"  metodo="P" idRol="' + data + '">Agregar Permisos</button>';
                         return acciones;
                     },
                 },
@@ -57,6 +58,7 @@ function editarRol(){
         console.log(data);
         let metodo=$(this).attr('metodo');
         id=$(this).attr('idRol');
+        //alert(id)
         if(metodo==='U'){
             $('#idRol').val(id);
             $('#nombreRol').val(data.name);
@@ -68,15 +70,39 @@ function editarRol(){
             $("#btnFormRol").trigger("click");
         }else if(metodo === 'P'){
             $('#nombreRolPermiso').val(data.name);
+            $('#opRolPermiso').val(metodo);
+            $('#idRolPermiso').val(id);
             $('#modalPermiso').modal('show');
+
         }
 
     });
 }
+function guardarRolPermiso(){
+    $('#btnFornRolPermiso').click(function(e){
+        var formRolPermisos=serializeForm($('#formRolPermiso'));
+        let OpRolPermiso = $('#opOrganizacionPersona').val();
+
+        console.log(JSON.stringify(formRolPermisos));
+    })
+}
+function serializeForm($form) {
+    var formData = $form.serializeArray();
+    // Obtener los checkboxes y agregarlos a formData con valor 1 si están marcados o 0 si no lo están
+    $form.find('input[type=checkbox]').each(function() {
+        var value = this.checked ? '1' : '0';
+        formData.push({name: this.name, value: value});
+    });
+    return $.param(formData);
+}
+
+
+
 function GuardarRol(){
     $('#btnFornRol').click(function(e){
         let OpRol=$('#opRol').val();
         var formData = $('#formRol').serialize();
+        console.log(formData);
         if(OpRol ==='I'){
             crudRol(formData);
         }else if(OpRol ==='U'){
