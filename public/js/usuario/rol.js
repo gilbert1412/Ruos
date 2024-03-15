@@ -81,8 +81,7 @@ function editarRol(){
 function guardarRolPermiso(){
     $('#btnFornRolPermiso').click(function(e){
         //var formRolPermisos=$('#formRolPermiso').serialize();
-        var form=document.getElementById('formRolPermiso');
-        var formRolPermisos=new FormData(form);
+        var formRolPermisos=new FormData($("#modalPermiso"));
         alert( JSON.stringify(formRolPermisos));
         // var check=document.querySelectorAll('.checkbox');
         // //alert( JSON.stringify( check))
