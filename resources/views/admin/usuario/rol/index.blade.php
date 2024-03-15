@@ -92,7 +92,7 @@
 
                                 @foreach ($permiso as $key=> $values )
                                 <div class="form-check form-switch">
-                                    <input  type="checkbox" class="form-check-input" form="permiso" name="$permiso[{{$key}}]" value="{{$values->id}}">
+                                    <input  type="checkbox" class="form-check-input checkbox" form="permiso" name="permiso[]" value="{{$values->id}}">
                                     {{$values->name}}
                                   </div>
                                 @endforeach

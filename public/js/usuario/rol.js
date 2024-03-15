@@ -7,7 +7,7 @@ $(document).ready(function(){
     cargarModal();
     editarRol();
     GuardarRol();
-    guardarRolPermiso();
+
 });
 function cargarTabla(){
     tablaRol = $('#tablaRol').DataTable({
@@ -73,28 +73,45 @@ function editarRol(){
             $('#opRolPermiso').val(metodo);
             $('#idRolPermiso').val(id);
             $('#modalPermiso').modal('show');
-
+            guardarRolPermiso();
         }
 
     });
 }
 function guardarRolPermiso(){
     $('#btnFornRolPermiso').click(function(e){
-        var formRolPermisos=serializeForm($('#formRolPermiso'));
-        let OpRolPermiso = $('#opOrganizacionPersona').val();
-
-        console.log(JSON.stringify(formRolPermisos));
+        //var formRolPermisos=$('#formRolPermiso').serialize();
+        var form=document.getElementById('formRolPermiso');
+        var formRolPermisos=new FormData(form);
+        alert( JSON.stringify(formRolPermisos));
+        // var check=document.querySelectorAll('.checkbox');
+        // //alert( JSON.stringify( check))
+        // let OpRolPermiso = $('#opOrganizacionPersona').val();
+        // var newData=[];
+        // check.forEach((e)=>{
+        //     //alert(JSON.stringify(e.name))
+        //     if(e.checked==true){
+        //         newData.push(e.name);
+        //         console.log(e.value);
+        //     }
+        // })
+        // var newDataSerialized = (newData);
+        // alert(newDataSerialized);
+        // var combinedData = formRolPermisos + '&' + newDataSerialized;
+        // alert(combinedData)
+        //console.log(JSON.stringify(formRolPermisos));
     })
 }
-function serializeForm($form) {
-    var formData = $form.serializeArray();
-    // Obtener los checkboxes y agregarlos a formData con valor 1 si están marcados o 0 si no lo están
-    $form.find('input[type=checkbox]').each(function() {
-        var value = this.checked ? '1' : '0';
-        formData.push({name: this.name, value: value});
-    });
-    return $.param(formData);
-}
+// function serializeForm($form) {
+//     var formData = $form.serializeArray();
+//     // Obtener los checkboxes y agregarlos a formData con valor 1 si están marcados o 0 si no lo están
+//     $form.find('input[type=checkbox]').each(function() {
+//         var value = this.checked ? '1' : '0';
+//         formData.push({name: this.name, value: value});
+//     });
+//     return $.param(formData);
+// }
+
 
 
 
