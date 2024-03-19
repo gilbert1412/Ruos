@@ -7,7 +7,7 @@ $(document).ready(function(){
     cargarModal();
     editarRol();
     GuardarRol();
-
+    guardarRolPermiso();
 });
 function cargarTabla(){
     tablaRol = $('#tablaRol').DataTable({
@@ -69,47 +69,32 @@ function editarRol(){
             $('#opRol').val(metodo);
             $("#btnFormRol").trigger("click");
         }else if(metodo === 'P'){
+            $('#modalPermiso').on('hidden.bs.modal', function () {
+
+                $('[name="permiso[]"]').prop('checked', false);
+            });
             $('#nombreRolPermiso').val(data.name);
             $('#opRolPermiso').val(metodo);
-            $('#idRolPermiso').val(id);
+            var id=$('#idRolPermiso').val(id);
             $('#modalPermiso').modal('show');
-            guardarRolPermiso();
+            var data={'id':id.val()};
+            mostrarCheckbox(data)
+
         }
 
     });
 }
 function guardarRolPermiso(){
     $('#btnFornRolPermiso').click(function(e){
-        //var formRolPermisos=$('#formRolPermiso').serialize();
-        var formRolPermisos=new FormData($("#modalPermiso"));
-        alert( JSON.stringify(formRolPermisos));
-        // var check=document.querySelectorAll('.checkbox');
-        // //alert( JSON.stringify( check))
-        // let OpRolPermiso = $('#opOrganizacionPersona').val();
-        // var newData=[];
-        // check.forEach((e)=>{
-        //     //alert(JSON.stringify(e.name))
-        //     if(e.checked==true){
-        //         newData.push(e.name);
-        //         console.log(e.value);
-        //     }
-        // })
-        // var newDataSerialized = (newData);
-        // alert(newDataSerialized);
-        // var combinedData = formRolPermisos + '&' + newDataSerialized;
-        // alert(combinedData)
-        //console.log(JSON.stringify(formRolPermisos));
+
+        console.log(formData);
+        let opRolPermiso=$('#opRolPermiso').val();
+        var formData = $('#formRolPermiso').serialize();
+        if(opRolPermiso==='P'){
+            crudRolPermiso(formData);
+        }
     })
 }
-// function serializeForm($form) {
-//     var formData = $form.serializeArray();
-//     // Obtener los checkboxes y agregarlos a formData con valor 1 si están marcados o 0 si no lo están
-//     $form.find('input[type=checkbox]').each(function() {
-//         var value = this.checked ? '1' : '0';
-//         formData.push({name: this.name, value: value});
-//     });
-//     return $.param(formData);
-// }
 
 
 
@@ -183,3 +168,59 @@ function crudRol(data){
     });
 }
 
+function crudRolPermiso(data){
+    $.ajax({
+        type: 'post',
+        url: guardarDatos,
+        data: data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response){
+            //se ejecuta cuabndo se cierra el modal
+            $('#modalPermiso').on('hidden.bs.modal', function () {
+                $('.error-message').text('');
+            });
+            console.log(response);
+            // Si hay errores, mostrarlos debajo de cada campo correspondiente
+            if (response.errors) {
+                $.each(response.errors, function(key, value) {
+                    $("#" + key + "Error").text(value[0]);
+                });
+            } else{
+                $('#modalPermiso').modal('hide')
+                $('.error-message').text('');
+                $('#tablaRol').DataTable().ajax.reload();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: response.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        },
+
+    });
+}
+
+function mostrarCheckbox(data){
+
+
+    $.ajax({
+        type: 'post',
+        url: cargarCheckbox,
+        data: data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response){
+           // alert(JSON.stringify(response))
+            response.forEach(({id, name}) => {
+                $('#checkbox' + id).prop('checked', true);
+            });
+
+        },
+
+    });
+}

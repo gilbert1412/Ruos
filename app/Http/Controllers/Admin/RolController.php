@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 class RolController extends Controller
 {
     public function index(){
@@ -40,6 +41,27 @@ class RolController extends Controller
                 ->update(['name' => $request->input('nombreRol')]);
                 return response()->json(['success' => "Registro Editado"]);
             }
+        }else if($request->input('opRolPermiso')=='P'){
+           //dd($request->all());
+
+            $role=Role::findOrFail($request->input('idRolPermiso'));
+            $role->syncPermissions($request->input('permiso'));
+            return response()->json(
+                [
+                    'success' => "Asignacion de Permisos Correcto",
+
+                ]
+            );
         }
+    }
+
+    public function cargarCheckbox(Request $request){
+       // dd($request->all());
+        $role=Role::findById($request->input('id'));
+        $permissions=$role->permissions;
+        return response()->json(
+            $permissions
+        );
+
     }
 }
