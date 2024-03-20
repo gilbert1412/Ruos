@@ -20,11 +20,13 @@ use App\Http\Controllers\Admin\UserController;
 */
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //TipoOrganizacion
 Route::get('tipo-organizacion', [TipoOrganizacionController::class, 'index'])->name('tipoOrganizacion');
 Route::post('tipo-organizacion/post', [TipoOrganizacionController::class, 'GuardarTipoOrganizacion'])->name('tipoOrganizacion.post');
@@ -63,3 +65,5 @@ Route::get('user', [UserController::class, 'index'])->name('user');
 Route::get('user/get', [UserController::class, 'cargarTabla'])->name('user.mostrar');
 Route::post('user/post', [UserController::class, 'guardarUsuario'])->name('usuario.post');
 Route::post('userCheckbox/get', [UserController::class, 'cargarUserCheckbox'])->name('checkboxUser.mostrar');
+
+});

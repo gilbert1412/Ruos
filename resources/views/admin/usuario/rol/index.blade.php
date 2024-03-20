@@ -51,20 +51,33 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaRol" class="listTablaRol display table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                        <th>Agregar Permisos</th>
+            <table id="tablaRol" class="listTablaRol table text-nowrap mb-0 align-middle table table-sm " style="width:100%">
+                <thead class="text-dark fs-4">
+                    <tr class="border-bottom-0">
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Agregar Permisos</h6>
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody></tbody>
                 <tfoot>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                        <th>Agregar Permisos</th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Agregar Permisos</h6>
+                        </th>
                     </tr>
                 </tfoot>
             </table>

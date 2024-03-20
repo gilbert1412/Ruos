@@ -51,18 +51,26 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaPermiso" class="listTablaPermiso display table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
+            <table id="tablaPermiso" class="listTablaPermiso text-nowrap mb-0 align-middle table table-sm" style="width:100%">
+                <thead class="text-dark fs-4">
+                    <tr class="border-bottom-0">
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
                     </tr>
                 </thead>
                 <tbody></tbody>
                 <tfoot>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
+                    <tr class="border-bottom-0">
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
                     </tr>
                 </tfoot>
             </table>

@@ -9,7 +9,7 @@
         <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.png')}}" />
         <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}"  />
         <link href="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css">
+
 
         @yield('head')
     </head>

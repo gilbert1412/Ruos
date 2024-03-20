@@ -85,7 +85,6 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="button" class="btn btn-primary" id="btnFormOrganizacion" metodo="I">Guardar</button>
-
                             </div>
                         </form>
                     </div>
@@ -95,32 +94,63 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaOrganizacion" class="listTablaOrganizacion display table-hover" style="width:100%">
-                <thead>
-                    <tr>
+            <table id="tablaOrganizacion" class="listTablaOrganizacion disabled " style="width:100%">
+                <thead class="text-dark fs-4">
+                    <tr class="border-bottom-0">
 
-                        <th>Nombre</th>
-                        <th>Direccion</th>
-                        <th>Fecha de Creación</th>
-                        <th>Numero de Miembros</th>
-                        <th>Tipo de Organizacion</th>
-                        <th>Acciones</th>
-                        <th>Añadir Miembros</th>
-                        <th>Ver Miembros</th>
-
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Direccion</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Fecha de Creación</h6>
+                        </th>
+                        <th class="border-bottom-0" style="width:15%">
+                            <h6 class="fw-semibold mb-0">Numero de Miembros</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Tipo de Organizacion</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Añadir Miembros</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Ver Miembros</h6>
+                        </th>
                     </tr>
                 </thead>
                 <tbody></tbody>
                 <tfoot>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Direccion</th>
-                        <th>Fecha de Creación</th>
-                        <th>Numero de Miembros</th>
-                        <th>Tipo de Organizacion</th>
-                        <th>Acciones</th>
-                        <th>Añadir Miembros</th>
-                        <th>Ver Miembros</th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Direccion</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Fecha de Creación</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Numero de Miembros</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Tipo de Organizacion</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Añadir Miembros</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Ver Miembros</h6>
+                        </th>
 
                     </tr>
                 </tfoot>

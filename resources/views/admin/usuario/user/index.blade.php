@@ -27,35 +27,37 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="mb-6">
                                             <input type="hidden" id="opUsuario" name="opUsuario" value="I">
                                             <input type="hidden" id="idUsuario" name='idUsuario'>
                                             <label for="nombreUsuario" class="form-label">Nombre del Rol</label>
-                                            <input class="form-control" type="text" id="nombreUsuario" name="nombreRol" placeholder="Escribir el Nombre" aria-label="default input example">
+                                            <input class="form-control"  type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Escribir el Nombre" aria-label="default input example">
                                             <span class="error-message" id="nombreUsuarioError"></span>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="mb-6">
-
-                                            <label for="nombreUsuario" class="form-label">Correo del Usuario</label>
-                                            <input class="form-control" type="text" id="correoUsuario" name="correoRol" placeholder="Escribir el Nombre" aria-label="default input example">
-                                            <span class="error-message" id="correoUsuarioError"></span>
+                                            <label for="correoUsuario" class="form-label">Correo del Usuario</label>
+                                            <input class="form-control" type="email" id="email" name="email" placeholder="Escribir el Nombre" aria-label="default input example">
+                                            <span class="error-message" id="emailError"></span>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="mb-6">
-                                            {{-- <select name="role[]" class="form-control" id="" multiple>
-                                                <option value="">Seleccionar Roles</option>
-                                                @foreach ($role as $value)
-                                                    <option value="{{$value->name}}">{{$value->name}}</option>
-                                                @endforeach
-                                            </select> --}}
-
-                                            @foreach ($role as $value )
-                                            <div class="form-check form-switch">
-                                                <input  type="checkbox" id="checkbox{{ $value->id }}" class="form-check-input checkbox" name="role[]" value="{{$value->name}}">
-                                                {{$value->name}}
-                                            </div>
-                                            @endforeach
+                                            <label for="correoUsuario" id="labelContra" class="form-label">Contraseña del Usuario</label>
+                                            <input class="form-control" type="password" id="contraUsuario" name="contraUsuario" placeholder="Escribir el Nombre" aria-label="default input example">
+                                            <span class="error-message" id="contraUsuarioError"></span>
                                         </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @foreach ($role as $value )
+                                        <div class="form-check form-switch">
+                                            <input  type="checkbox" id="checkbox{{ $value->id }}" class="form-check-input checkbox" name="role[]" value="{{$value->name}}">
+                                            {{$value->name}}
+                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -72,12 +74,19 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaUsuario" class="listTablaUsuario display table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Acciones</th>
+            <table id="tablaUsuario" class="listTablaUsuario table text-nowrap mb-0 align-middle table table-sm" style="width:100%">
+                <thead class="text-dark fs-4">
+                    <tr class="border-bottom-0">
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Correo</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody></tbody>

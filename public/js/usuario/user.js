@@ -6,7 +6,10 @@ $(document).ready(function () {
     cargarModal();
     editarUsuario();
     GuardarUsuario();
+    $('#modalUsuario').on('hidden.bs.modal', function () {
 
+        $('[name="role[]"]').prop('checked', false);
+    });
 });
 function cargarTabla() {
     tablaUsuario = $('#tablaUsuario').DataTable({
@@ -24,7 +27,7 @@ function cargarTabla() {
                     aTargets: [2],
                     mData: "id",
                     mRender: function (data, type, full) {
-                        var acciones = '<div class="btn-group"> <button class="btn btn-info waves-effect waves-light"  metodo="U" idUsuario="' + data + '">Editar</button>';
+                        var acciones = '<div class="btn-group"> <button class="btn btn-info waves-effect waves-light"  metodo="U" idUsuario="' + data + '">Añadir Roles</button>';
                         acciones += '<button class="btn btn-danger waves-effect waves-light" metodo="E" idUsuario="' + data + '">Eliminar</button> </div>'
                         return acciones;
                     },
@@ -39,11 +42,15 @@ function cargarTabla() {
 }
 function cargarModal() {
     $('#btnModalUsuario').on('click', function () {
+        $('#nombreUsuario').prop('disabled',false);
+        $("#email").prop('disabled',false);
+        $('#contraUsuario').prop('hidden',false);
+        $('#labelContra').prop('hidden',false);
         $('#btnFormUsuario').html('Guardar');
         $('#modalUsuario').modal('show');
         $('#opUsuario').val('I');
         $('#nombreUsuario').val('');
-        $('#correoUsuario').val('');
+        $('#email').val('');
 
     })
 }
@@ -59,7 +66,11 @@ function editarUsuario() {
         if (metodo === 'U') {
             var id=$('#idUsuario').val(id);
             $('#nombreUsuario').val(data.name);
-            $("#correoUsuario").val(data.email)
+            $("#email").val(data.email);
+            $('#nombreUsuario').prop('disabled',true);
+            $("#email").prop('disabled',true);
+            $('#contraUsuario').prop('hidden',true);
+            $('#labelContra').prop('hidden',true);
             $('#modalUsuario').modal('show');
             $('#opUsuario').val(metodo);
             var data={'id':id.val()};
@@ -102,10 +113,7 @@ function GuardarUsuario() {
     })
 }
 function crudUsuario(data) {
-    $('#modalUsuario').on('hidden.bs.modal', function () {
 
-        $('[name="role[]"]').prop('checked', false);
-    });
     $.ajax({
         type: 'post',
         url: guardarDatos,
