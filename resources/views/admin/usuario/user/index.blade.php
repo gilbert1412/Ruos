@@ -29,8 +29,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-6">
-                                            <input type="text" id="opUsuario" name="opUsuario" value="I">
-                                            <input type="text" id="idUsuario" name='idUsuario'>
+                                            <input type="hidden" id="opUsuario" name="opUsuario" value="I">
+                                            <input type="hidden" id="idUsuario" name='idUsuario'>
                                             <label for="nombreUsuario" class="form-label">Nombre del Rol</label>
                                             <input class="form-control" type="text" id="nombreUsuario" name="nombreRol" placeholder="Escribir el Nombre" aria-label="default input example">
                                             <span class="error-message" id="nombreUsuarioError"></span>
@@ -106,6 +106,7 @@
 
     let cargarDatos="{{route('user.mostrar')}}";
     let guardarDatos="{{route('usuario.post')}}";
+    let cargarCheckbox="{{route('checkboxUser.mostrar')}}";
 </script>
 
 @endsection

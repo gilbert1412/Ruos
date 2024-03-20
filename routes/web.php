@@ -62,3 +62,4 @@ Route::post('checkbox/get', [RolController::class, 'cargarCheckbox'])->name('che
 Route::get('user', [UserController::class, 'index'])->name('user');
 Route::get('user/get', [UserController::class, 'cargarTabla'])->name('user.mostrar');
 Route::post('user/post', [UserController::class, 'guardarUsuario'])->name('usuario.post');
+Route::post('userCheckbox/get', [UserController::class, 'cargarUserCheckbox'])->name('checkboxUser.mostrar');

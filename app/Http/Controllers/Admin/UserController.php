@@ -24,4 +24,9 @@ class UserController extends Controller
         $usuario->syncRoles($request->input('role'));
         return response()->json(['success' => "Asignacion de Roles Correcto"]);
     }
+    public function cargarUserCheckbox(Request $request){
+        $user=User::findOrFail($request->input('id'));
+        $role=$user->getPermissionsViaRoles();
+        return response()->json($role);
+    }
 }

@@ -215,7 +215,7 @@ function mostrarCheckbox(data){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-           // alert(JSON.stringify(response))
+           alert(JSON.stringify(response))
             response.forEach(({id, name}) => {
                 $('#checkbox' + id).prop('checked', true);
             });

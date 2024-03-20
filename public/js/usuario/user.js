@@ -57,17 +57,17 @@ function editarUsuario() {
         let metodo = $(this).attr('metodo');
         id = $(this).attr('idUsuario');
         if (metodo === 'U') {
-            $('#idUsuario').val(id);
+            var id=$('#idUsuario').val(id);
             $('#nombreUsuario').val(data.name);
             $("#correoUsuario").val(data.email)
             $('#modalUsuario').modal('show');
             $('#opUsuario').val(metodo);
+            var data={'id':id.val()};
+            mostrarCheckbox(data);
         } else if (metodo === 'E') {
             $('#idUsuario').val(id)
             $('#opUsuario').val(metodo);
             $("#btnFormUsuario").trigger("click");
-        }else if(metodo==='A'){
-            alert('as')
         }
 
     });
@@ -102,6 +102,10 @@ function GuardarUsuario() {
     })
 }
 function crudUsuario(data) {
+    $('#modalUsuario').on('hidden.bs.modal', function () {
+
+        $('[name="role[]"]').prop('checked', false);
+    });
     $.ajax({
         type: 'post',
         url: guardarDatos,
@@ -117,7 +121,6 @@ function crudUsuario(data) {
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function (key, value) {
-                    console.log(key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else {
@@ -132,6 +135,25 @@ function crudUsuario(data) {
                     timer: 1500
                 });
             }
+        },
+
+    });
+}
+function mostrarCheckbox(data){
+    $.ajax({
+        type: 'post',
+        url: cargarCheckbox,
+        data: data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response){
+           console.log(JSON.stringify(response))
+            response.forEach(({id, pivot}) => {
+                //alert(JSON.stringify(pivot.role_id))
+                $('#checkbox' + pivot.role_id).prop('checked', true);
+            });
+
         },
 
     });
