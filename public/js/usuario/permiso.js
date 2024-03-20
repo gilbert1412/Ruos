@@ -48,7 +48,6 @@ function cerrarModal(){
 function editarPermiso(){
     $('.listTablaPermiso').on('click', 'button', function() {
         var data = tablaPermiso.row($(this).parents('tr')).data();
-        console.log(data);
         let metodo=$(this).attr('metodo');
         id=$(this).attr('idPermiso');
         if(metodo==='U'){

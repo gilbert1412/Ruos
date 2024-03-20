@@ -46,10 +46,8 @@ function cerrarModal(){
 function editarTipoOrganizacion(){
     $('.listTablaTipoOrganizacion').on('click', 'button', function() {
         var data = tablaTipoOrganizacion.row($(this).parents('tr')).data();
-        console.log(data);
         let metodo=$(this).attr('metodo');
         id=$(this).attr('idTipoOrganiozacion');
-        alert(id);
         if(metodo==='U'){
             $('#idTipoOrganizacion').val(id);
             $('#nombreTipoOrganizacion').val(data.nombre);
@@ -70,7 +68,6 @@ function GuardarTipoOrganizacion(){
         if(tipoOrganizacion ==='I'){
             crudTipoOrganizacion(formData);
         }else if(tipoOrganizacion ==='U'){
-            console.log(tipoOrganizacion);
             crudTipoOrganizacion(formData);
         }else if(tipoOrganizacion === 'E'){
             Swal.fire({
@@ -113,7 +110,6 @@ function crudTipoOrganizacion(data){
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function(key, value) {
-                    console.log(key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else{

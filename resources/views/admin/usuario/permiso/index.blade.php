@@ -30,10 +30,10 @@
                                     <div class="col-md-12">
                                         <div class="mb-6">
                                             <input type="hidden" id="opPermiso" name="opPermiso" value="I">
-                                            <input type="" id="idPermiso" name='idPermiso'>
+                                            <input type="hidden" id="idPermiso" name='idPermiso'>
                                             <label for="nombrePermiso" class="form-label">Asignar Permiso</label>
                                             <input class="form-control" type="text" id="nombrePermiso" name="nombrePermiso" placeholder="Escribir el Nombre" aria-label="default input example">
-                                            <span class="error-message" id="nombreRolErPermiso"></span>
+                                            <span class="error-message" id="nombrePermisoError"></span>
                                         </div>
                                     </div>
                                 </div>

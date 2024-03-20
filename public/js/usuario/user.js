@@ -87,8 +87,6 @@ function GuardarUsuario() {
     $('#btnFornUsuario').click(function (e) {
         let OpUsuario = $('#opUsuario').val();
         var formData = $('#formUsuario').serialize();
-
-        console.log(JSON.stringify(formData));
         if (OpUsuario === 'I') {
             crudUsuario(formData);
         } else if (OpUsuario === 'U') {
@@ -156,9 +154,7 @@ function mostrarCheckbox(data){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-           console.log(JSON.stringify(response))
             response.forEach(({id, pivot}) => {
-                //alert(JSON.stringify(pivot.role_id))
                 $('#checkbox' + pivot.role_id).prop('checked', true);
             });
 

@@ -55,10 +55,8 @@ function cerrarModal(){
 function editarRol(){
     $('.listTablaRol').on('click', 'button', function() {
         var data = tablaRol.row($(this).parents('tr')).data();
-        console.log(data);
         let metodo=$(this).attr('metodo');
         id=$(this).attr('idRol');
-        //alert(id)
         if(metodo==='U'){
             $('#idRol').val(id);
             $('#nombreRol').val(data.name);
@@ -86,8 +84,6 @@ function editarRol(){
 }
 function guardarRolPermiso(){
     $('#btnFornRolPermiso').click(function(e){
-
-        console.log(formData);
         let opRolPermiso=$('#opRolPermiso').val();
         var formData = $('#formRolPermiso').serialize();
         if(opRolPermiso==='P'){
@@ -103,7 +99,6 @@ function GuardarRol(){
     $('#btnFornRol').click(function(e){
         let OpRol=$('#opRol').val();
         var formData = $('#formRol').serialize();
-        console.log(formData);
         if(OpRol ==='I'){
             crudRol(formData);
         }else if(OpRol ==='U'){
@@ -181,7 +176,6 @@ function crudRolPermiso(data){
             $('#modalPermiso').on('hidden.bs.modal', function () {
                 $('.error-message').text('');
             });
-            console.log(response);
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function(key, value) {
@@ -215,7 +209,6 @@ function mostrarCheckbox(data){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-           alert(JSON.stringify(response))
             response.forEach(({id, name}) => {
                 $('#checkbox' + id).prop('checked', true);
             });

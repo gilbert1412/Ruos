@@ -30,7 +30,7 @@
                                     <input type="hidden" id="idTipoOrganizacion" name='idTipoOrganizacion'>
                                     <label for="nombreTipoOrganizacion" class="form-label">Nombre del Tipo de la Organizacion</label>
                                     <input class="form-control" type="text" id="nombreTipoOrganizacion" name="nombreTipoOrganizacion" placeholder="Escribir el Nombre" aria-label="default input example">
-                                    <span class="error-message" id="nombreError"></span>
+                                    <span class="error-message" id="nombreTipoOrganizacionError"></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
