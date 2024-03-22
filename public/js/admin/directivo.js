@@ -46,7 +46,6 @@ function cerrarModal(){
 function editarDirectivo(){
     $('.listTablaDirectivo').on('click', 'button', function() {
         var data = tablaDirectivo.row($(this).parents('tr')).data();
-        console.log(data);
         let metodo=$(this).attr('metodo');
         id=$(this).attr('idDirectivo');
         if(metodo==='U'){
@@ -105,7 +104,7 @@ function crudDirectivo(data){
         },
         success: function(response){
             //se ejecuta cuabndo se cierra el modal
-            $('#modalTipoOrganizacion').on('hidden.bs.modal', function () {
+            $('#modalDirectivo').on('hidden.bs.modal', function () {
                 $('.error-message').text('');
             });
             // Si hay errores, mostrarlos debajo de cada campo correspondiente

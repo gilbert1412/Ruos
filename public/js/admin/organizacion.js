@@ -74,11 +74,9 @@ function editarOrganizacion() {
         let metodo = $(this).attr('metodo');
         id = $(this).attr('idOrganizacion');
         if (metodo === 'U') {
-            console.log(data);
             $('#idOrganizacion').val(id);
             $('#nombreOrganizacion').val(data.nombre);
             $("#direccionOrganizacion").val(data.direccion)
-            alert(data.tipo_organizacion_id);
             $("#selectTipoOrganizacion").val(data.tipoOrganizacionId)
             //$('#selectTipoOrganizacion > option[value='+data.tipo_organizacion_id+']').attr('selected', 'selected');
             $("#fechaOrganizacion").val(data.fecha_inicio)
@@ -97,8 +95,7 @@ function editarOrganizacion() {
         }else if(metodo ==='V'){
 
             window.location.href =mostrarPersona+'?id='+id;
-            // alert(id);
-            // window.location.href =mostrarPersona+'?id='+id;
+
 
         }
 
@@ -109,7 +106,6 @@ function GuardarOrganizacion() {
         let Opdirectivo = $('#opOrganizacion').val();
         var formData = $('#formOrganizacion').serialize();
         var formPersona=$('#formPersonal').serialize();
-        console.log(JSON.stringify(formData));
         if (Opdirectivo === 'I') {
             crudDirectivo(formData);
         } else if (Opdirectivo === 'U') {
@@ -151,7 +147,6 @@ function crudDirectivo(data) {
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function (key, value) {
-                    console.log(key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else {
@@ -175,7 +170,6 @@ function guardarPersona(){
         let Opdirectivo = $('#opOrganizacionPersona').val();
         var formData = $('#formOrganizacion').serialize();
         var formPersona=$('#formPersonal').serialize();
-        console.log(JSON.stringify(formData));
          if(Opdirectivo==='A'){
             crudPersona(formPersona);
         }
@@ -199,7 +193,7 @@ function crudPersona(data) {
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function (key, value) {
-                    console.log("hola"+key);
+
                     $("#" + key + "Error").text(value[0]);
                 });
             } else {

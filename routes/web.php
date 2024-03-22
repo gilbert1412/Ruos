@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\TipoOrganizacionController;
 use App\Http\Controllers\Admin\DirectivoController;
 use App\Http\Controllers\Admin\OrganizacionController;
 use App\Http\Controllers\Admin\PersonaController;
+use App\Http\Controllers\Admin\RolController;
+use App\Http\Controllers\Admin\PermisoController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +18,15 @@ use App\Http\Controllers\Admin\PersonaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
+
 
 Route::get('/', function () {
-    return view('layout.maestra');
+    return view('auth.login');
 });
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //TipoOrganizacion
 Route::get('tipo-organizacion', [TipoOrganizacionController::class, 'index'])->name('tipoOrganizacion');
 Route::post('tipo-organizacion/post', [TipoOrganizacionController::class, 'GuardarTipoOrganizacion'])->name('tipoOrganizacion.post');
@@ -40,3 +48,22 @@ Route::get('personal', [OrganizacionController::class, 'verPersona'])->name('per
 Route::get('persona', [OrganizacionController::class, 'cargarListaPersona'])->name('persona.get');
 
 Route::post('persona/post', [PersonaController::class, 'GuardarPersona'])->name('persona.post');
+
+//roles
+Route::get('rol', [RolController::class, 'index'])->name('rol');
+Route::get('rol/get', [RolController::class, 'cargarTabla'])->name('rol.mostrar');
+Route::post('rol/post', [RolController::class, 'guardarRol'])->name('rol.post');
+
+//Permiso
+Route::get('permiso', [PermisoController::class, 'index'])->name('permiso');
+Route::get('permiso/get', [PermisoController::class, 'cargarTabla'])->name('permiso.mostrar');
+Route::post('permiso/post', [PermisoController::class, 'guardarPermiso'])->name('permiso.post');
+Route::post('checkbox/get', [RolController::class, 'cargarCheckbox'])->name('checkbox.mostrar');
+
+//roles
+Route::get('user', [UserController::class, 'index'])->name('user');
+Route::get('user/get', [UserController::class, 'cargarTabla'])->name('user.mostrar');
+Route::post('user/post', [UserController::class, 'guardarUsuario'])->name('usuario.post');
+Route::post('userCheckbox/get', [UserController::class, 'cargarUserCheckbox'])->name('checkboxUser.mostrar');
+
+});

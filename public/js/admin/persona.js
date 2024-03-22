@@ -23,7 +23,6 @@ function cargarTabla(){
 function editarModal(){
     $('.listTablaPersona').on('click', 'button', function () {
         var data=tabla.row($(this).parents('tr')).data();
-        console.log(JSON.stringify(data));
         let metodo = $(this).attr('metodo');
         id = $(this).attr('idPersona');
         if(metodo==='U'){
@@ -50,7 +49,6 @@ function guardarPersona() {
         let opPersona = $('#opPersona').val();
         var formData = $('#formPersonal').serialize();
         var formPersona=$('#formPersonal').serialize();
-        console.log(JSON.stringify(opPersona));
         if (opPersona === 'U') {
             crudPersona(formData);
         } else if (opPersona === 'E') {
@@ -88,7 +86,6 @@ function crudPersona(data) {
             // Si hay errores, mostrarlos debajo de cada campo correspondiente
             if (response.errors) {
                 $.each(response.errors, function (key, value) {
-                    console.log("hola"+key);
                     $("#" + key + "Error").text(value[0]);
                 });
             } else {

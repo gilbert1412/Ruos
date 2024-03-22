@@ -30,7 +30,7 @@
                                     <input type="hidden" id="idTipoOrganizacion" name='idTipoOrganizacion'>
                                     <label for="nombreTipoOrganizacion" class="form-label">Nombre del Tipo de la Organizacion</label>
                                     <input class="form-control" type="text" id="nombreTipoOrganizacion" name="nombreTipoOrganizacion" placeholder="Escribir el Nombre" aria-label="default input example">
-                                    <span class="error-message" id="nombreError"></span>
+                                    <span class="error-message" id="nombreTipoOrganizacionError"></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -46,19 +46,26 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            <table id="tablaTipoOrganizacion" class="listTablaTipoOrganizacion display" style="width:100%">
-                <thead>
-                    <tr>
+            <table id="tablaTipoOrganizacion" class="listTablaTipoOrganizacion text-nowrap mb-0 align-middle table table-sm" style="width:100%">
+                <thead class="text-dark fs-4">
+                    <tr class="border-bottom-0">
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
 
-                        <th>nombre</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-
-                        <th>nombre</th>
-                        <th>Acciones</th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Acciones</h6>
+                        </th>
                     </tr>
                 </tfoot>
             </table>
